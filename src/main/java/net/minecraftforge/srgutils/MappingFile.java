@@ -54,7 +54,8 @@ class MappingFile implements IMappingFile {
         return packages.get(original);
     }
 
-    Package addPackage(String original, String mapped) {
+    @Override
+    public Package addPackage(String original, String mapped) {
         return packages.put(original, new Package(original, mapped));
     }
 
@@ -69,7 +70,8 @@ class MappingFile implements IMappingFile {
         return classes.get(original);
     }
 
-    Cls addClass(String original, String mapped) {
+    @Override
+    public Cls addClass(String original, String mapped) {
         Cls ret = new Cls(original, mapped);
         classes.put(original, ret);
         return ret;
@@ -272,7 +274,8 @@ class MappingFile implements IMappingFile {
             return fld  == null ? field : fld.getMapped();
         }
 
-        void addField(String original, String mapped) {
+        @Override
+        public void addField(String original, String mapped) {
             this.fields.put(original, new Field(original, mapped));
         }
 
@@ -285,7 +288,8 @@ class MappingFile implements IMappingFile {
             return this.methodsView;
         }
 
-        void addMethod(String original, String desc, String mapped) {
+        @Override
+        public void addMethod(String original, String desc, String mapped) {
             this.methods.put(original + desc, new Method(original, desc, mapped));
         }
 

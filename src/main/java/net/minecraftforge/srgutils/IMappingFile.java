@@ -41,6 +41,10 @@ public interface IMappingFile {
         return InternalUtils.load(in);
     }
 
+    public static IMappingFile create() {
+        return new MappingFile();
+    }
+
     public enum Format {
         SRG(false),
         XSRG(false),
@@ -72,6 +76,9 @@ public interface IMappingFile {
     Collection<? extends IClass> getClasses();
     IClass getClass(String original);
 
+    IPackage addPackage(String original, String mapped);
+    IClass addClass(String original, String mapped);
+
     String remapPackage(String pkg);
     String remapClass(String desc);
     String remapDescriptor(String desc);
@@ -93,6 +100,9 @@ public interface IMappingFile {
     public interface IClass extends INode {
         Collection<? extends IField> getFields();
         Collection<? extends IMethod> getMethods();
+
+        void addField(String original, String mapped);
+        void addMethod(String original, String desc, String mapped);
 
         String remapField(String field);
         String remapMethod(String name, String desc);
